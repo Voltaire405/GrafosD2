@@ -16,7 +16,7 @@ public class Program {
 
         try {
             opt = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el tipo de grafo: \n1. Dirigido.\n2.No dirigido.\n0.Salir", "0"));
-            if (opt != 1 || opt != 2) {
+            if (opt != 1 && opt != 2) {
                 System.exit(0);
             }
         } catch (Exception ex) {
@@ -54,9 +54,9 @@ public class Program {
 
         //instantiate Graph class.
         graph = new Graph(vertexNum, userEntry, opt);
-        
-        graph.escribe();
-        
+        JOptionPane.showMessageDialog(null, "Completo: " + graph.isComplete() +
+        		"\nRegular: " + graph.isRegular() +
+        		"\nEuleriano: " + graph.isEulerian());
 
     }
 }
