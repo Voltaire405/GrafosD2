@@ -35,7 +35,7 @@ public class Graph {
     }
 
     public void calculateAdjacency() {
-        //Asigna la matriz de adyacencia, los indices cero se omiten aunque aparezcan por pr√°cticidad.
+        //Asigna la matriz de adyacencia, los indices cero se omiten aunque aparezcan por pr·cticidad.
         String[] characters = representation.split("");
         this.mAdjacency = new ArrayList<>(this.numVertex);//Rows
         for (int i = 0; i <= numVertex; i++) {
@@ -80,16 +80,75 @@ public class Graph {
         }
     }
 
-    public Boolean isComplete() {
-        return true;
+    public boolean isComplete() {
+    	boolean completo=false;
+    	int aristas=0;
+    	
+    	for(int i=1;i<mIncidence.size();i++) {
+    		for(int j=1; j<mIncidence.get(i).size(); j++) {
+    			if(mIncidence.get(i).get(j)!=(Object)0) {
+    				aristas++;
+    			}
+    		}
+    	}
+    	aristas=aristas/2;
+    	
+    	if(type==1) {//dirigido
+    		if(aristas==(numVertex*(numVertex-1)))completo=true;
+    	}
+    	else {//no dirigido
+    		if(aristas==(numVertex*(numVertex-1)/2))completo=true;
+    	}
+        return completo;
     }
 
     public Boolean isRegular() {
-        return true;
+    	int cont1=0, cont2=0; //contadores
+    	boolean regular=true;
+    	
+    	for(int i=1; i<mIncidence.get(1).size(); i++) {//indicador para avanzar por las columnas
+    		for(int j=1; j<mIncidence.size(); j++) {//filas
+    			if(mIncidence.get(j).get(i)!=(Object)0) {
+    				if(i==1) {
+    					cont1++;
+    				}
+    				else {
+    					cont2++;
+    				}
+    			}
+    		}
+    		if(i>1) {
+    			if(cont1!=cont2) {
+    				regular=false;
+    				break;
+    			}
+    		}
+    		cont2=0;
+    	}
+        return regular;
     }
 
     public Boolean isEulerian() {
-        return true;
+    	boolean euleriano=true;
+    	int cont=0;//contador
+    	for(int i=1; i<mIncidence.get(1).size(); i++) {//indicador para avanzar por las columnas
+    		for(int j=1; j<mIncidence.size(); j++) {//filas
+    			if(mIncidence.get(j).get(i)!=(Object)0) {
+    				cont++;
+    			}
+    		}
+    		if(cont%2!=0) {
+    			euleriano=false;
+    			break;
+    		}
+    	}
+    	return euleriano;
+    }
+    
+    public void escribe() {
+    	for(int i=0;i<mIncidence.size();i++) {
+    		System.out.println(mIncidence.get(i));
+    	}
     }
 
 }

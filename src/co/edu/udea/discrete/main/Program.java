@@ -20,12 +20,12 @@ public class Program {
                 System.exit(0);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Entrada no v√°lida.");
+            JOptionPane.showMessageDialog(null, "Entrada no v·lida.");
         }
 
 
         userEntry = JOptionPane.showInputDialog(null, "Ingrese por favor las aristas de su Grafo separado por " +
-                "','. Ej. 14,25,13,32,... empleando n√∫meros enteros para identificar los vertices y sin dejar espacios.");
+                "','. Ej. 14,25,13,32,... empleando n˙meros enteros para identificar los vertices y sin dejar espacios.");
         userEntry = userEntry.replace(",", "");
 
         //User Validations.
@@ -39,7 +39,7 @@ public class Program {
                 if (integer > vertexNum) {
                     vertexNum = integer;
                 }
-                System.out.println(integer);
+                //System.out.println(integer);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -47,13 +47,16 @@ public class Program {
 
         entryVertexConnections = userEntry.length();
         if (entryVertexConnections % 2 != 0) {
-            JOptionPane.showMessageDialog(null, "Formato de ingreso del grafo no v√°lido");
+            JOptionPane.showMessageDialog(null, "Formato de ingreso del grafo no v·lido");
         } else {
-            //JOptionPane.showMessageDialog(null,"Formato de ingreso del grafo v√°lido");
+            //JOptionPane.showMessageDialog(null,"Formato de ingreso del grafo v·lido");
         }
 
         //instantiate Graph class.
         graph = new Graph(vertexNum, userEntry, opt);
+        
+        graph.escribe();
+        
 
     }
 }
